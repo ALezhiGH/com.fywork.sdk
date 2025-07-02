@@ -1,0 +1,17 @@
+{
+  "displayName": "Fywork SDK",
+  "name": "com.fywork.sdk",
+  "version": "1.0.1",
+  "unity": "2020.1",
+  "keywords": [
+    "fywork"
+  ],
+  "dependencies": {
+	"com.fywork.csj": "1.0.0",
+	"com.fywork.umeng": "1.0.0",
+    "com.fywork.hykb": "1.4.2",
+    "com.taptap.sdk.compliance": "4.5.3",
+    "com.taptap.sdk.core": "4.5.3",
+    "com.taptap.sdk.login": "4.5.3"
+  }
+}

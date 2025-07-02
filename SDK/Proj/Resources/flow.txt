@@ -1,0 +1,30 @@
+{
+	"load": [{
+		"kind": "1",
+		"servs": ["agrt"]
+	},
+	{
+		"kind": "2",
+		"servs": ["agrt"]
+	},
+	{
+		"kind": "1",
+		"servs": ["pos"]
+	},
+	{
+		"kind": "1",
+		"servs": ["log","fcm","reg","ads","pbz","upd","cmt","frm","rec","link","ctrl","stat"]
+	}],
+	"work": [{
+		"kind": "2",
+		"servs": ["upd"]
+	},
+	{
+		"kind": "2",
+		"servs": ["log"]
+	},
+	{
+		"kind": "2",
+		"servs": ["fcm"]
+	}]
+}

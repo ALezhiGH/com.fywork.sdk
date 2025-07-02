@@ -1,0 +1,18 @@
+{
+    "name": "Fywork.SDK.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f63fd05a053247f4886be1eb4a84bb36"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
