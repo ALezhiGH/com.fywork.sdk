@@ -7,6 +7,7 @@
     "fywork"
   ],
   "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1",
 	"com.fywork.csj": "1.0.0",
 	"com.fywork.umeng": "1.0.0",
     "com.fywork.hykb": "1.4.2",
