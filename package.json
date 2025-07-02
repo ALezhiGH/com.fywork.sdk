@@ -10,8 +10,8 @@
 	"com.fywork.csj": "1.0.0",
 	"com.fywork.umeng": "1.0.0",
     "com.fywork.hykb": "1.4.2",
-    "com.taptap.sdk.compliance": "4.5.3",
-    "com.taptap.sdk.core": "4.5.3",
-    "com.taptap.sdk.login": "4.5.3"
+    "com.taptap.sdk.compliance": "4.6.3",
+    "com.taptap.sdk.core": "4.6.3",
+    "com.taptap.sdk.login": "4.6.3"
   }
 }
