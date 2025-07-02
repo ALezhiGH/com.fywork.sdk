@@ -8,9 +8,9 @@
 ## Package下的Manifest.Json引入Tap sdk
     "dependencies": {
         "com.google.external-dependency-manager": "1.2.179",
-        "com.taptap.sdk.compliance": "4.5.3",
-        "com.taptap.sdk.core": "4.5.3",
-        "com.taptap.sdk.login": "4.5.3"
+        "com.taptap.sdk.compliance": "4.6.3",
+        "com.taptap.sdk.core": "4.6.3",
+        "com.taptap.sdk.login": "4.6.3"
     },
     "scopedRegistries": [
         {
@@ -111,7 +111,7 @@
         return;
     }
 
-## supplierconfig.json 文件移到 hykb sdk 的 config 文件夹下
+## supplierconfig.json 文件移到Assets\Resources 文件夹下
     同时删除Plugins\Android文件夹下的 assets、libs、res等文件夹
 
 ## PlayerSetting 里的 Allow downloads over HTTP 改为 Always allowed
