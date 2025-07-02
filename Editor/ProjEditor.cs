@@ -285,7 +285,7 @@ namespace SDK.Editor
                 return;
             }
             // 
-            SaveFile(Application.dataPath.Replace("/Assets", "") + "/Packages/com.fywork.sdk/SDK/Proj/Resources/chnl.txt", JsonTool.jsonEncode(table));
+            SaveFile(Path.Combine(Application.dataPath, "Resources"), "chnl.txt", JsonTool.jsonEncode(table));
             AssetDatabase.Refresh();
         }
 
@@ -390,13 +390,17 @@ namespace SDK.Editor
         /// <summary>
         /// 保存到文件
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="data"></param>
-        private static void SaveFile(string path, string data)
+        /// <param name="path">文件夹路径</param>
+        /// <param name="fileName">文件名</param>
+        /// <param name="data">数据</param>
+        private static void SaveFile(string path, string fileName, string data)
         {
             try
             {
-                StreamWriter streamWriter = File.CreateText(path);
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                
+                StreamWriter streamWriter = File.CreateText(Path.Combine(path, fileName));
                 streamWriter.Write(data);
                 streamWriter.Flush();
                 streamWriter.Close();
