@@ -73,7 +73,7 @@ namespace Fyw
             if (request.result != UnityWebRequest.Result.Success)
             {
                 //打印错误信息
-                Debug.Log("Server Data Load " + request.error);
+                Debug.LogError("Server Data Load Fail: " + request.error);
             }
             else
             {
@@ -89,7 +89,7 @@ namespace Fyw
                 else
                 {
                     //打印错误信息
-                    Debug.Log("Server Data Load " + request.responseCode);
+                    Debug.LogError("Server Data Load Error: " + request.responseCode);
                 }
             }
         }

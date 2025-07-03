@@ -101,6 +101,11 @@ namespace SDK
                 {
                     return;
                 }
+                table = table["data"] as Hashtable;
+                if (null == table)
+                {
+                    return;
+                }
                 this.upd_data = UpdData.Parse(table);
             }
             catch (System.Exception e)

@@ -38,7 +38,7 @@ namespace SDK
             if (request.result != UnityWebRequest.Result.Success)
             {
                 //打印错误信息
-                LogTool.Error("Server Data Load " + request.error);
+                LogTool.Error("Server Data Load Fail: " + request.error);
             }
             else
             {
@@ -51,7 +51,7 @@ namespace SDK
                 else
                 {
                     //打印错误信息
-                    LogTool.Error("Server Data Load " + request.responseCode);
+                    LogTool.Error("Server Data Load Error: " + request.responseCode);
                 }
             }
             this.Back();

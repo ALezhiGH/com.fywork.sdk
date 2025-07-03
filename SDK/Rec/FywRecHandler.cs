@@ -64,8 +64,14 @@ namespace SDK
         {
             try
             {
-                ArrayList list = JsonTool.jsonDecode(data) as ArrayList;
+                Hashtable table = JsonTool.jsonDecode(data) as Hashtable;
+                if (null == table)
+                {
+                    return;
+                }
+                ArrayList list = table["data"] as ArrayList;
                 if (null == list)
+                    if (null == list)
                 {
                     return;
                 }

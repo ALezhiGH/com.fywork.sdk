@@ -30,6 +30,11 @@ namespace SDK
                 {
                     return;
                 }
+                table = table["data"] as Hashtable;
+                if (null == table)
+                {
+                    return;
+                }
                 if (!table.ContainsKey("payflag"))
                 {
                     return;
