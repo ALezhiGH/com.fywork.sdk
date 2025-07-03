@@ -123,10 +123,20 @@
     去掉Custom Main Manifest、Custom Launcher Manifest、Custom Launcher Gradle Template;
     剩下的全部用Framework的模板替换.
 
-    否则会报错:    
+    否则会报错:
+1: Task failed with an exception.
+-----------
+* What went wrong:
 A problem occurred configuring project ':launcher'.
 > Could not resolve all dependencies for configuration ':launcher:classpath'.
    > Using insecure protocols with repositories, without explicit opt-in, is unsupported. Switch Maven repository 'maven(http://maven.aliyun.com/nexus/content/groups/public)' to redirect to a secure protocol (like HTTPS) or allow insecure protocols. See https://docs.gradle.org/7.5.1/dsl/org.gradle.api.artifacts.repositories.UrlArtifactRepository.html#org.gradle.api.artifacts.repositories.UrlArtifactRepository:allowInsecureProtocol for more details. 
+
+1: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':launcher:processReleaseResources'.
+> A failure occurred while executing com.android.build.gradle.internal.res.LinkApplicationAndroidResourcesTask$TaskAction
+   > Android resource linking failed
 
 ## 因为 AndroidPrivacyAgreementPostBuildProcessor.cs 里面没有删除重复的内容而报错, 直接使用SDK里的即可.
 * What went wrong:
