@@ -35,23 +35,23 @@ namespace SDK
                 {
                     return;
                 }
-                if (!table.ContainsKey("payflag"))
+                if (!table.ContainsKey("pay_flag"))
                 {
                     return;
                 }
-                if (!table.ContainsKey("adsflag"))
+                if (!table.ContainsKey("ads_flag"))
                 {
                     return;
                 }
-                if (!table.ContainsKey("shrflag"))
+                if (!table.ContainsKey("shr_flag"))
                 {
                     return;
                 }
-                if (!table.ContainsKey("saveurl"))
+                if (!table.ContainsKey("save_url"))
                 {
                     return;
                 }
-                if (!table.ContainsKey("rankurl"))
+                if (!table.ContainsKey("rank_url"))
                 {
                     return;
                 }
