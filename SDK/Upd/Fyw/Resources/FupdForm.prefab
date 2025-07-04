@@ -251,6 +251,8 @@ GameObject:
   - component: {fileID: 7510130694973503119}
   - component: {fileID: 7510130694973503118}
   - component: {fileID: 7907220154271445981}
+  - component: {fileID: 6301970509254922313}
+  - component: {fileID: 552426386171121316}
   m_Layer: 5
   m_Name: FupdForm
   m_TagString: Untagged
@@ -328,6 +330,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3fd0627279c2df49a799ac8ac04b2e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &6301970509254922313
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510130694973503120}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 100
+  m_TargetDisplay: 0
+--- !u!114 &552426386171121316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510130694973503120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &7510130695194242168
 GameObject:
   m_ObjectHideFlags: 0

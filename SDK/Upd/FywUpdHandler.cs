@@ -62,9 +62,16 @@ namespace SDK
             }
             if (this.upd_data.ForceUpd)//强制更新次次提示
             {
+                GameObject canvas = GameObject.Find("Canvas");
+                if (null == canvas)
+                {
+                    LogTool.Error("没有找到Canvas");
+                    this.Back();
+                    return;
+                }
                 GameObject obj = Resources.Load("FupdForm") as GameObject;
                 this.use_form = GameObject.Instantiate(obj);
-                this.use_form.transform.SetParent(GameObject.Find("Canvas").transform);
+                this.use_form.transform.SetParent(canvas.transform);
                 this.use_form.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
                 this.use_form.GetComponent<RectTransform>().sizeDelta = new Vector3(0, 0, 0);
                 this.use_form.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
@@ -74,9 +81,16 @@ namespace SDK
             }
             if (ver_old != this.upd_data.VerNew && this.upd_data.NeedUpd)//普通更新只提示一次
             {
+                GameObject canvas = GameObject.Find("Canvas");
+                if (null == canvas)
+                {
+                    LogTool.Error("没有找到Canvas");
+                    this.Back();
+                    return;
+                }
                 GameObject obj = Resources.Load("NupdForm") as GameObject;
                 this.use_form = GameObject.Instantiate(obj);
-                this.use_form.transform.SetParent(GameObject.Find("Canvas").transform);
+                this.use_form.transform.SetParent(canvas.transform);
                 this.use_form.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
                 this.use_form.GetComponent<RectTransform>().sizeDelta = new Vector3(0, 0, 0);
                 this.use_form.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);

@@ -44,9 +44,16 @@ namespace SDK
         /// </summary>
         protected override void Call()
         {
+            GameObject canvas = GameObject.Find("Canvas");
+            if (null == canvas)
+            {
+                LogTool.Error("没有找到Canvas");
+                this.Back();
+                return;
+            }
             GameObject obj = Resources.Load("LinkForm") as GameObject;
             this.link_form = GameObject.Instantiate(obj);
-            this.link_form.transform.SetParent(GameObject.Find("Canvas").transform);
+            this.link_form.transform.SetParent(canvas.transform);
             this.link_form.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
             this.link_form.GetComponent<RectTransform>().sizeDelta = new Vector3(0, 0, 0);
             this.link_form.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
