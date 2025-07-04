@@ -41,6 +41,11 @@
     引用不到的类可以自动添加命名空间SDK即可.
     比如ChnlControl、AdvertCode、
 
+## CopyControy.cs 用 PlatGeneric.cs 替代    
+    CopyControy.GetPowe() 改为 PlatGeneric.CallPerm(null)//调用ios权限
+    CopyControy.OnClickCopyText 改为 PlatGeneric.CopyText
+    CallContact.JoinQQGroup("") 改为 PlatGeneric.JoinQQ("", "")
+
 ## CallCmnt() 改为 CallCmt()
     ChnlControl.Instance.CallCmnt();
     改为:
@@ -54,16 +59,16 @@
     CallServer.Instance.ShowGameList 改为 ChnlControl.Instance.CallRec (推荐服务就是这个功能，只不过自带了统一界面，游戏中就不需要界面了，直接CallRec就行了)
     CallServer.Instance.ShowVersion 暂无替换,可以移除
 
+## "更多"(推荐)按钮处理
+    this.RecomControl.Show(this.OnPanelClose);
+    改为:
+    ChnlControl.Instance.CallRec(this.OnPanelClose);
+
 ## SdkControl.cs 用 ChnlControl.cs 替代, 修改URL
     SdkControl.Instance.PrivacyUrl 改为 ChnlControl.Instance.PrivUrl
     SdkControl.Instance.ServiceUrl 改为 ChnlControl.Instance.ServUrl
 
-## CopyControy.cs 用 PlatGeneric.cs 替代    
-    CopyControy.GetPowe() 改为 PlatGeneric.CallPerm(null)//调用ios权限
-    CopyControy.OnClickCopyText 改为 PlatGeneric.CopyText
-    CallContact.JoinQQGroup("") 改为 PlatGeneric.JoinQQ("", "")
-
-## 论坛按钮处理
+## "论坛"按钮处理
     Application.OpenURL(InfoControl.Instance.FrmUrl) 改为 SDK.ChnlControl.Instance.CallFrm()
 
 # SDK 初始化
