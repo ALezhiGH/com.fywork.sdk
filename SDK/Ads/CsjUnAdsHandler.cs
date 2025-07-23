@@ -302,7 +302,7 @@ namespace SDK
             privacyConfig.MediationPrivacyConfig = new MediationPrivacyConfig();
             privacyConfig.MediationPrivacyConfig.LimitPersonalAds = false;
             privacyConfig.MediationPrivacyConfig.ProgrammaticRecommend = false;
-            privacyConfig.MediationPrivacyConfig.forbiddenCAID = false;
+            privacyConfig.MediationPrivacyConfig.forbiddenCAID = false;//20250723@Lezhi CSJ_M_SDK_6800 已移除本字段
             privacyConfig.MediationPrivacyConfig.CanUseOaid = false;
 
             return privacyConfig;

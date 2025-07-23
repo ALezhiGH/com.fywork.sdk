@@ -59,6 +59,8 @@
     CallServer.Instance.ShowGameList 改为 ChnlControl.Instance.CallRec (推荐服务就是这个功能，只不过自带了统一界面，游戏中就不需要界面了，直接CallRec就行了)
     CallServer.Instance.ShowVersion 暂无替换,可以移除
 
+## InfoControl.Instance.RankUrl 改为 ChnlControl.Instance.RankUrl
+
 ## "更多"(推荐)按钮处理
     this.RecomControl.Show(this.OnPanelClose);
     改为:
