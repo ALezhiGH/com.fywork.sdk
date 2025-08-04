@@ -24,7 +24,7 @@ namespace SDK
     public delegate void AdCallback(AdvertCode code);
 
     /// <summary>
-    /// 评论处理器
+    /// 广告处理器
     /// </summary>
     public abstract class AdsHandler : ServHandler
     {

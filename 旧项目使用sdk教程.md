@@ -1,9 +1,10 @@
 # 编辑器报错处理
-## 删除otherSDK文件,用本地package代替
-    com.fywork.csj@1.0.0
-    com.fywork.hykb@1.4.2
-    com.fywork.sdk@1.0.0
-    com.fywork.umeng@1.0.0
+## 删除otherSDK文件,用package代替
+    "com.fywork.csj": "https://github.com/ALezhiGH/com.fywork.csj.git",
+    "com.fywork.taku": "https://github.com/ALezhiGH/com.fywork.taku.git",
+    "com.fywork.umeng": "https://github.com/ALezhiGH/com.fywork.umeng.git",
+    "com.fywork.hykb": "https://github.com/ALezhiGH/com.fywork.hykb.git",
+    "com.fywork.sdk": "https://github.com/ALezhiGH/com.fywork.sdk.git",
 
 ## Package下的Manifest.Json引入Tap sdk
     "dependencies": {
@@ -124,7 +125,9 @@
 ## PlayerSetting 里的 Allow downloads over HTTP 改为 Always allowed
 
 # 打包错误处理
-## Target API Level 选择 32
+## Android Level
+* #1 Minimum API Level 选择 Android7.0以上
+* #2 Target API Level 选择 32
 
 ## Publishing Settings 修改
     去掉Custom Main Manifest、Custom Launcher Manifest、Custom Launcher Gradle Template;

@@ -1,14 +1,16 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+#if FY_CSJ
+using System.Collections.Generic;
 using ByteDance.Union;
 using ByteDance.Union.Mediation;
-using System.Threading;
+#endif
 
 namespace SDK
 {
     /// <summary>
-    /// 穿山甲聚合处理器
+    /// 穿山甲聚合广告处理器
     /// </summary>
     public class CsjUnAdsHandler : AdsHandler
     {
@@ -22,6 +24,7 @@ namespace SDK
         /// </summary>
         private int reward_load = -1;
 
+#if FY_CSJ
         /// <summary>
         /// 插全屏和新插屏，支持csj和融合
         /// </summary>
@@ -31,6 +34,7 @@ namespace SDK
         /// 激励视频，支持csj和融合
         /// </summary>
         public RewardVideoAd reward_ad;
+#endif
 
         /// <summary>
         /// 主线程
@@ -145,6 +149,7 @@ namespace SDK
         /// </summary>
         private void loadInsertAd()
         {
+#if FY_CSJ
             // 释放上一次广告
             if (this.insert_ad != null)
             {
@@ -166,6 +171,7 @@ namespace SDK
 
             // 加载广告
             ByteDance.Union.SDK.CreateAdNative().LoadFullScreenVideoAd(adSlot, new InsertAdLoadListener(this));
+#endif
         }
 
         /// <summary>
@@ -173,6 +179,7 @@ namespace SDK
         /// </summary>
         private void loadRewardAd()
         {
+#if FY_CSJ
             // 释放上一次广告
             if (this.reward_ad != null)
             {
@@ -204,6 +211,7 @@ namespace SDK
 
             // 加载广告
             ByteDance.Union.SDK.CreateAdNative().LoadRewardVideoAd(adSlot, new RewardAdLoadListener(this));
+#endif
         }
 
         /// <summary>
@@ -211,11 +219,13 @@ namespace SDK
         /// </summary>
         private void showInsertAd()
         {
+#if FY_CSJ
             // 设置展示阶段的监听器
             this.insert_ad.SetFullScreenVideoAdInteractionListener(new InsertAdPlayListener(this));
             this.insert_ad.SetDownloadListener(new AppDownloadListener(this));
             this.insert_ad.SetAdInteractionListener(new AdInteractListener());
             this.insert_ad.ShowFullScreenVideoAd();
+#endif
         }
 
         /// <summary>
@@ -223,6 +233,7 @@ namespace SDK
         /// </summary>
         private void showRewardAd()
         {
+#if FY_CSJ
             // 设置展示阶段的监听器
             this.reward_ad.SetRewardAdInteractionListener(new RewardAdPlayListener(this));
             this.reward_ad.SetAgainRewardAdInteractionListener(null);//屏蔽再一次观看
@@ -232,6 +243,7 @@ namespace SDK
             this.reward_ad.SetRewardPlayAgainController(null);//屏蔽再一次观看
 #endif
             this.reward_ad.ShowRewardVideoAd();
+#endif
         }
 
         /// <summary>
@@ -245,6 +257,7 @@ namespace SDK
             }
             else
             {
+#if FY_CSJ
                 // sdk初始化
                 SDKConfiguration sdkConfiguration = new SDKConfiguration.Builder()
                     .SetAppId(this.key)
@@ -261,6 +274,7 @@ namespace SDK
 
                 Pangle.Init(sdkConfiguration); // 合规要求，初始化分为2步，第一步先调用init
                 Pangle.Start(this.SdkInitCallback); // 第二步再调用start。注意在初始化回调成功后再请求广告
+#endif
             }
         }
 
@@ -284,6 +298,7 @@ namespace SDK
             this.Back();
         }
 
+#if FY_CSJ
         /// <summary>
         /// 初始化时进行隐私合规相关配置。不设置的将使用默认值
         /// </summary>
@@ -743,5 +758,6 @@ namespace SDK
                 LogTool.Norm($"CsjUn OnInstalled 安装完成 on main thread: {Thread.CurrentThread.ManagedThreadId == this.handler.MainThread}");
             }
         }
+#endif
     }
 }

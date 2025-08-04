@@ -1,3 +1,7 @@
+# Version 1.2.0 -2025.7.24
+* #1 移除 csj 和 umeng sdk 的引用,使用宏定义代替
+* #2 新增 TakuUnAdsHandler.cs
+
 # Version 1.1.0 -2025.7.23
 * #1 调整csj sdk 1.0.0 -> 2.0.0
 
