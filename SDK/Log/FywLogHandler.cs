@@ -11,7 +11,7 @@ namespace SDK
         /// <summary>
         /// 保存key
         /// </summary>
-        private string save_key = "";
+        private string save = "";
 
         /// <summary>
         /// 初始化处理
@@ -19,7 +19,7 @@ namespace SDK
         /// <param name="args"></param>
         protected override void Init(Hashtable args)
         {
-            this.save_key = args["save"].ToString();
+            this.save = args["save"].ToString();
             this.Back();
         }
 
@@ -29,15 +29,15 @@ namespace SDK
         protected override void Call()
         {
             string user_id;
-            if (!PlayerPrefs.HasKey(this.save_key))
+            if (!PlayerPrefs.HasKey(this.save))
             {
                 user_id = SystemInfo.deviceUniqueIdentifier;
-                PlayerPrefs.SetString(this.save_key, user_id);
+                PlayerPrefs.SetString(this.save, user_id);
                 PlayerPrefs.Save();
             }
             else
             {
-                user_id = PlayerPrefs.GetString(this.save_key);
+                user_id = PlayerPrefs.GetString(this.save);
             }
             string open_id = user_id + "_" + Application.identifier;
             string union_id = user_id + "_" + Application.companyName;

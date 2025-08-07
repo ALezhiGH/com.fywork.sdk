@@ -2,6 +2,7 @@
 using System;
 using TapSDK.Core;
 using TapSDK.Compliance;
+using UnityEngine;
 
 namespace SDK
 {
@@ -16,6 +17,11 @@ namespace SDK
         protected string token;
 
         /// <summary>
+        /// 保存key
+        /// </summary>
+        private string save = "";
+
+        /// <summary>
         /// 初始化
         /// </summary>
         /// <param name="args"></param>
@@ -23,6 +29,7 @@ namespace SDK
         {
             this.key = args["key"].ToString();
             this.token = args["token"].ToString();
+            this.save = args["save"].ToString();
             this.InitSDK();
         }
 
@@ -32,7 +39,18 @@ namespace SDK
         protected override void Call()
         {
             // LogTool.Norm($"[TapFcmHandler] Call.  chnl_ctrl.OpenID:{chnl_ctrl.OpenID}");
-            TapTapCompliance.Startup(this.chnl_ctrl.OpenID);
+            string stamp;
+            if (!PlayerPrefs.HasKey(this.save))
+            {
+                stamp = ((long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds).ToString();
+                PlayerPrefs.SetString(this.save, stamp);
+                PlayerPrefs.Save();
+            }
+            else
+            {
+                stamp = PlayerPrefs.GetString(this.save);
+            }
+            TapTapCompliance.Startup(this.chnl_ctrl.OpenID + "_" + stamp);
         }
 
         /// <summary>
@@ -49,7 +67,7 @@ namespace SDK
             // 合规认证配置
             TapTapComplianceOption complianceOption = new TapTapComplianceOption
             {
-                showSwitchAccount = true, // 是否显示切换账号按钮
+                showSwitchAccount = false, // 是否显示切换账号按钮
                 useAgeRange = false // 是否使用年龄段信息
             };
             // 其他模块配置项

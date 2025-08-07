@@ -103,9 +103,9 @@ namespace SDK
         /// <returns></returns>
         public override bool ShowInsert(AdCallback call)
         {
+            this.ad_call = call;
             if (this.insert_load > 0)
             {
-                this.ad_call = call;
                 this.showInsertAd();
                 return true;
             }
@@ -274,6 +274,8 @@ namespace SDK
 
                 Pangle.Init(sdkConfiguration); // 合规要求，初始化分为2步，第一步先调用init
                 Pangle.Start(this.SdkInitCallback); // 第二步再调用start。注意在初始化回调成功后再请求广告
+#else
+                SdkInitCallback(false, "Cannot finde FY_CSJ");
 #endif
             }
         }

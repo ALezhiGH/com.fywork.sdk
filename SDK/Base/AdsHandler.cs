@@ -83,10 +83,7 @@ namespace SDK
         /// <param name="code"></param>
         protected virtual void DoShowback(AdvertCode code)
         {
-            if (null != this.ad_call)
-            {
-                this.ad_call(code);
-            }
+            this.ad_call?.Invoke(code);
             this.ad_call = null;
         }
     }

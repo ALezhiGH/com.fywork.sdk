@@ -1,9 +1,6 @@
-#if UNITY_ANDROID
-
-using UnityEditor;
+#if UNITY_ANDROID && Show_Privacy
 using UnityEditor.Android;
 using UnityEngine;
-using System.Linq;
 using System.IO;
 
 /// <summary>
@@ -13,7 +10,6 @@ class AndroidPrivacyAgreementPostBuildProcessor : IPostGenerateGradleAndroidProj
 {
     private string privacyAppName = Application.productName;
     private string privacyEmail = "2082502204@qq.com";
-
 
     public int callbackOrder { get { return 999; } }
     public void OnPostGenerateGradleAndroidProject(string path)
