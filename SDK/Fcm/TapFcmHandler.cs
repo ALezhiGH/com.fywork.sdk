@@ -67,7 +67,7 @@ namespace SDK
             // 合规认证配置
             TapTapComplianceOption complianceOption = new TapTapComplianceOption
             {
-                showSwitchAccount = false, // 是否显示切换账号按钮
+                showSwitchAccount = true, // 是否显示切换账号按钮
                 useAgeRange = false // 是否使用年龄段信息
             };
             // 其他模块配置项
@@ -89,7 +89,9 @@ namespace SDK
                     case 1000: // 防沉迷认证凭证无效时触发
                         PlatGeneric.ExitApp();
                         break;
-                    case 1001: // 切换账号处理 因不允许切换 故不处理
+                    case 1001: // 切换账号处理
+                        PlayerPrefs.DeleteKey(this.save);
+                        this.Call();
                         break;
                     case 1030: // 用户当前时间无法进行游戏 Tap处理
                     case 1050: // 用户无可玩时长 Tap处理
