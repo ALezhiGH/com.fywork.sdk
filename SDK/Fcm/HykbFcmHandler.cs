@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
+#if HYKB
 using com.m3839.sdk;
 using com.m3839.sdk.single;
+#endif
 
 namespace SDK
 {
@@ -31,6 +33,7 @@ namespace SDK
             }
             else
             {
+#if HYKB
                 //游戏屏幕方向 （Game Screen Orientation）
                 int screen = HykbContext.SCREEN_PORTRAIT;
                 //初始化回调监听（Init callback）
@@ -38,9 +41,13 @@ namespace SDK
                 //HykbLogin.Init(this.game_id, screen, proxy);
                 HykbFcmListenerProxy proxy = new HykbFcmListenerProxy(this);
                 UnionFcmSDK.Init(this.key, screen, proxy);
+#else
+                this.Back();
+#endif
             }
         }
 
+#if HYKB
         /// <summary>
         /// 防沉迷监听
         /// </summary>
@@ -89,5 +96,6 @@ namespace SDK
                 this.handler.Back();
             }
         }
+#endif
     }
 }

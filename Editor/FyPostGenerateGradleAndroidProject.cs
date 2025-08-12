@@ -1,32 +1,35 @@
 #if UNITY_ANDROID
+using System;
 using System.Collections;
+using System.IO;
 using UnityEditor.Android;
 using UnityEngine;
-using System.IO;
 using SDK;
 
-/// <summary>
-/// 处理安卓的隐私协议
-/// </summary>
-class AndroidPrivacyAgreementPostBuildProcessor : IPostGenerateGradleAndroidProject
+public class FyPostGenerateGradleAndroidProject : IPostGenerateGradleAndroidProject
 {
-    private string privacyAppName = Application.productName;
-    private string privacyEmail = "2082502204@qq.com";
+    public int callbackOrder => 999;
 
-    public int callbackOrder { get { return 999; } }
     public void OnPostGenerateGradleAndroidProject(string path)
     {
-        Debug.Log("AndroidPostBuildProcessor.OnPostGenerateGradleAndroidProject at path " + path);
-
+        //..\SourceCode\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary
+        Debug.Log($"[FyPostGenerateGradleAndroidProject] path: {path}");
+        
+        //【在 UnityPlayerActivity.java 中添加首次启动隐私协议弹窗】
         string unityPlayerJavaFilePath = path + "/src/main/java/com/unity3d/player/UnityPlayerActivity.java";
         string content = File.ReadAllText(unityPlayerJavaFilePath);
 
-		//读取后台配置表的链接地址
+        //读取后台配置表的链接地址
         var asset = Resources.Load<TextAsset>("chnl");
         Hashtable chnl_args = JsonTool.jsonDecode(asset.text) as Hashtable;
         //"agrt":{"hdlr":"FywAgrtHandler", "serv":"https://www.fanyu.work/home/service.html",
-		//		  "cnty":0, "save":"Agreement", "priv":"https://www.fanyu.work/home/privacy.html"},
+        //		  "cnty":0, "save":"Agreement", "priv":"https://www.fanyu.work/home/privacy.html"},
         var args = chnl_args["agrt"] as Hashtable;
+        if (args == null || !args.ContainsKey("priv") || !args.ContainsKey("serv"))
+        {
+            Debug.Log("没有配置 agrt");
+            return;
+        }
         var PrivUrl = args["priv"].ToString();//"priv":"https://www.fanyu.work/home/privacy.html"
         var ServUrl = args["serv"].ToString();//"serv":"https://www.fanyu.work/home/service.html"
         //替换地址
@@ -42,7 +45,7 @@ class AndroidPrivacyAgreementPostBuildProcessor : IPostGenerateGradleAndroidProj
             content = content.Replace(privacyContent, "");
         }
         
-		//2.再更新内容
+        //2.再更新内容
         content = content.Replace("import android.os.Process;", "import android.os.Process;" + privacyImport);
         content = content.Replace("mUnityPlayer = new UnityPlayer(this, this);", privacyContent + "mUnityPlayer = new UnityPlayer(this, this);");
 
@@ -129,5 +132,93 @@ import android.text.method.LinkMovementMethod;//新增";
             msgTxt.setMovementMethod(LinkMovementMethod.getInstance());
         }
 	";
+    
+    private string AddToolsReplace(string androidManifest, string key, string value)
+    {
+        var toolsIndex = androidManifest.IndexOf("tools:replace=\"");
+        if (toolsIndex >= 0)
+        {
+            if (androidManifest.Contains(key))
+            {
+                Debug.Log($"[skip attribute]{key}");
+                return androidManifest;
+            }
+            
+            var startIndex = toolsIndex + 15;
+            var endIndex = androidManifest.IndexOf("\"", startIndex);
+            var length = endIndex - startIndex;
+            var content = androidManifest.Substring(startIndex, length);
+            var newContent = content + $",{key}\"" + $" {key}=\"{value}\"";
+            Debug.Log($"[startIndex]{startIndex} [endIndex]{endIndex}  [length]{length} [content]{content} [newContent]{newContent}");
+            androidManifest = androidManifest.Replace($"tools:replace=\"{content}\"", $"tools:replace=\"{newContent}");
+        }
+        else
+        {
+            var attribute = $"{key}=\"{value}\"";
+            if (!androidManifest.Contains(attribute))
+            {
+                androidManifest = androidManifest.Replace("<application", "<application " + attribute);
+                Debug.Log($"[add attribute]{attribute}");
+            }
+
+            attribute = $"tools:replace=\"{key}\"";
+            if (!androidManifest.Contains(attribute))
+            {
+                androidManifest = androidManifest.Replace("<application", "<application " + attribute);
+                Debug.Log($"[add attribute]{attribute}");
+            }
+        }
+        
+        return androidManifest;
+    }
+
+    private static string AddSigningEnabled(string nowLauncherBuildGradle, string permission)
+    {
+        if (!nowLauncherBuildGradle.Contains(permission))
+        {
+            var endOfApplication = nowLauncherBuildGradle.IndexOf("keyPassword 'Fy880618'", StringComparison.OrdinalIgnoreCase) +
+                                   "keyPassword 'Fy880618'".Length;
+
+            nowLauncherBuildGradle = nowLauncherBuildGradle.Insert(endOfApplication, $"\n{permission} true");
+        }
+
+        return nowLauncherBuildGradle;
+    }
+
+    private static string BuildGradlePath(string rootPath)
+    {
+        return Path.Combine(rootPath, "build.gradle");
+    }
+
+    private static string ProGuardPath(string rootPath)
+    {
+        return Path.Combine(rootPath, "proguard-unity.txt");
+    }
+
+    private static string AddDependencies(string buildGradle, string toAdd)
+    {
+        if (!buildGradle.Contains(toAdd))
+        {
+            var tag = "implementation fileTree(dir: 'libs', include: ['*.jar'])";
+            var index = buildGradle.IndexOf(tag, StringComparison.OrdinalIgnoreCase) + tag.Length;
+            buildGradle = buildGradle.Insert(index, $"\n{toAdd}");
+        }
+
+        return buildGradle;
+    }
+
+    private static string AddPermission(string nowManifestFile, string permission)
+    {
+        if (!nowManifestFile.Contains(permission))
+        {
+            var endOfApplication = nowManifestFile.IndexOf("</application>", StringComparison.OrdinalIgnoreCase) +
+                                   "</application>".Length;
+
+            nowManifestFile = nowManifestFile.Insert(endOfApplication,
+                $"\n<uses-permission android:name=\"android.permission.{permission}\" />");
+        }
+
+        return nowManifestFile;
+    }
 }
 #endif
